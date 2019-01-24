@@ -7,6 +7,10 @@ test.remove();
 const io = require("socket.io-client");
 const socket = io();
 
+socket.on("connect", () => {
+	can.style.opacity = 1;
+});
+
 socket.on("size", size => {
 	can.width = size;
 	can.height = size;
