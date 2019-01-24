@@ -1,14 +1,17 @@
 <html>
 
-	<body>
+	<head>
+		<title>
+			Together Sandbox
+		</title>
+
+		<!-- Let us know about errors -->
 		<script>
-			window.onerror = (msg, file, line) => alert(`Error occurred at line ${line}: ${msg}`);
+			window.onerror = (msg, file, line) => console.error(`Error occurred at line ${line}: ${msg}`);
 		</script>
-		<span id="test"></span>
-		<div id="o">
-			<canvas id="e"></canvas>
-		</div>
-		<script src="/index.js" defer></script>
+
+		<script src="index.js" defer></script>
+
 		<style>
 			body {
 				margin: 0px;
@@ -46,6 +49,16 @@
 				transform: translateY(-50%);
 			}
 		</style>
+	</head>
+
+	<body>
+		<span id="test"></span>
+
+		<div id="o">
+			<canvas id="e"></canvas>
+		</div>
+
+
 	</body>
 
 </html>
