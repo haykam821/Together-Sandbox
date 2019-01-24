@@ -143,6 +143,11 @@ class Map {
 	rand() {
 		return [rand(0, this.size - 1), rand(0, this.size - 1)]
 	}
+
+	distanceBetween(x1, y1, x2, y2) {
+		// Praise ES6
+		return Math.hypot(x2 - x1, y2 - y1);
+	}
 }
 const map = new Map(30);
 
