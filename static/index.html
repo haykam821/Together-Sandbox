@@ -1,10 +1,10 @@
 <html>
 
-<body style="margin:0;overflow:hidden;background:black">
-	<script>
-		window.onerror = (msg, file, line) => alert(`Error occurred at line ${line}: ${msg}`);
-	</script>
-	<span id="test" style="position:absolute;top:0;left:0; color: white;padding:3px;background-color: rgba(0,0,0,0.5);border-radius:3px;margin:4px;"></span>
+	<body style="margin:0;overflow:hidden;background:black">
+		<script>
+			window.onerror = (msg, file, line) => alert(`Error occurred at line ${line}: ${msg}`);
+		</script>
+		<span id="test" style="position:absolute;top:0;left:0; color: white;padding:3px;background-color: rgba(0,0,0,0.5);border-radius:3px;margin:4px;"></span>
 		<div id="o">
 			<canvas id="e" style="border:1px solid white;"></canvas>
 		</div>
@@ -16,6 +16,7 @@
 				display: flex;
 				justify-content: center;
 			}
+
 			#e {
 				width: 88vmin;
 				height: 88vmin;
@@ -23,9 +24,10 @@
 				min-height: 300px;
 				image-rendering: pixelated;
 				position: relative;
-top: 50%;
-transform: translateY(-50%);
+				top: 50%;
+				transform: translateY(-50%);
 			}
 		</style>
 	</body>
+
 </html>
