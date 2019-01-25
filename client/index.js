@@ -4,6 +4,8 @@ const ctx = can.getContext("2d");
 const test = document.getElementById("test");
 test.remove();
 
+const contrast = require("hex-contrast-color");
+
 const io = require("socket.io-client");
 const socket = io();
 
@@ -39,7 +41,9 @@ socket.on("placedata", placeData => {
 		elem.dataset.type = placeable[0];
 		elem.innerText = placeable[1];
 		elem.title = placeable[2];
-		elem.style.background = placeable[3];
+
+		elem.style.backgroundColor = placeable[3];
+		elem.style.color = contrast(placeable[3]);
 
 		elem.addEventListener("click", () => {
 			setSelected(placeable[0]);

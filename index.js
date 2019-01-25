@@ -54,7 +54,7 @@ class Block {
 Block.clientInfo = [
 	"Empty",
 	"Nothing!",
-	"linear-gradient(to bottom, white, gray)",
+	"#ffffff",
 ];
 
 class WallBlock extends Block {
@@ -66,7 +66,7 @@ class WallBlock extends Block {
 WallBlock.clientInfo = [
 	"Wall",
 	"A simple block that players cannot get through.",
-	"black",
+	"#000000",
 ];
 
 class PlayerBlock extends Block {
