@@ -86,15 +86,12 @@ class PlayerBlock extends Block {
 
 		socket.on("place", data => {
 			if (!placeNames.includes(data.type)) return;
-			console.log("cool")
 
 			const dist = map.distanceBetween(this.x, this.y, data.x, data.y);
-			if (dist > 5) return;
-			console.log("cool2")
+			if (dist > 12) return;
 
 			const currTile = map.get(data.x, data.y);
 			if (!placeNames.includes(currTile.type)) return;
-			console.log("cool3", data)
 
 			const placedTile = new (placeables[data.type])();
 			map.setTile(data.x, data.y, placedTile, false);
