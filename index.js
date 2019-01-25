@@ -104,12 +104,14 @@ function makeColorTile(color, name) {
 		constructor() {
 			super(color);
 			this.solid = true;
-			this.type = "ColorBlock_" + (name || color);
+			this.type = "ColorBlock_" + (name || color).replace(/ /g, "_");
 		}
 	}
 
 	let displayName = (name || color) + " Wall";
-	displayName = displayName[0].toUpperCase() + displayName.slice(1);
+	displayName = displayName.split(" ").map(part => {
+		return part[0].toUpperCase() + part.slice(1);
+	}).join(" ");
 
 	colorTile.clientInfo = [
 		displayName,
