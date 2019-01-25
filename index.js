@@ -34,6 +34,8 @@ class Block {
 		this.color = color;
 		this.above = null;
 
+		this.type = this.constructor.name;
+
 		this.solid = false;
 
 		this.x = this.y = 0;
@@ -91,7 +93,7 @@ class PlayerBlock extends Block {
 			console.log("cool2")
 
 			const currTile = map.get(data.x, data.y);
-			if (!placeNames.includes(currTile.constructor.name)) return;
+			if (!placeNames.includes(currTile.type)) return;
 			console.log("cool3", data)
 
 			const placedTile = new (placeables[data.type])();
@@ -100,13 +102,42 @@ class PlayerBlock extends Block {
 	}
 }
 
+function makeColorTile(color, name) {
+	const colorTile = class extends Block {
+		constructor() {
+			super(color);
+			this.solid = true;
+			this.type = "ColorBlock_" + (name || color);
+		}
+	}
+
+	let displayName = (name || color) + " Wall";
+	displayName = displayName[0].toUpperCase() + displayName.slice(1);
+
+	colorTile.clientInfo = [
+		displayName,
+		`A wall that has been colored ${name || color}. Useful for pixel art.`,
+		color,
+	];
+
+	return colorTile;
+}
+
 const placeables = {
 	Block,
 	WallBlock,
+	ColorBlock_pink: makeColorTile("#e91e63", "pink"),
+	ColorBlock_red: makeColorTile("#f44336", "red"),
+	ColorBlock_orange: makeColorTile("#ff9800", "orange"),
+	ColorBlock_yellow: makeColorTile("#ffeb3b", "yellow"),
+	ColorBlock_green: makeColorTile("#4caf50", "green"),
+	ColorBlock_blue: makeColorTile("#2196f3", "blue"),
+	ColorBlock_indigo: makeColorTile("#3f51b5", "indigo"),
+	ColorBlock_purple: makeColorTile("#9c27b0", "purple"),
 };
-const placeData = Object.values(placeables).map(placeable => [
-	placeable.name,
-	...placeable.clientInfo,
+const placeData = Object.entries(placeables).map(entry => [
+	entry[0],
+	...entry[1].clientInfo,
 ]);
 const placeNames = Object.keys(placeables);
 
