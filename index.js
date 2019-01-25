@@ -49,6 +49,11 @@ class Block {
 		return !this.solid;
 	}
 }
+Block.clientInfo = [
+	"Empty",
+	"Nothing!",
+	"linear-gradient(to bottom, white, gray)",
+];
 
 class WallBlock extends Block {
 	constructor() {
@@ -56,6 +61,11 @@ class WallBlock extends Block {
 		this.solid = true;
 	}
 }
+WallBlock.clientInfo = [
+	"Wall",
+	"A simple block that players cannot get through.",
+	"black",
+];
 
 class PlayerBlock extends Block {
 	constructor(socket) {
@@ -71,8 +81,34 @@ class PlayerBlock extends Block {
 				map.setTile(old.x, old.y, old);
 			}
 		});
+
+		socket.on("place", data => {
+			if (!placeNames.includes(data.type)) return;
+			console.log("cool")
+
+			const dist = map.distanceBetween(this.x, this.y, data.x, data.y);
+			if (dist > 5) return;
+			console.log("cool2")
+
+			const currTile = map.get(data.x, data.y);
+			if (!placeNames.includes(currTile.constructor.name)) return;
+			console.log("cool3", data)
+
+			const placedTile = new (placeables[data.type])();
+			map.setTile(data.x, data.y, placedTile, false);
+		});
 	}
 }
+
+const placeables = {
+	Block,
+	WallBlock,
+};
+const placeData = Object.values(placeables).map(placeable => [
+	placeable.name,
+	...placeable.clientInfo,
+]);
+const placeNames = Object.keys(placeables);
 
 function getBlock() {
 	if (Math.random() > 0.9) {
@@ -125,14 +161,16 @@ class Map {
 		return !(x < 0 || x >= this.size || y < 0 || y >= this.size);
 	}
 
-	setTile(x, y, newTile) {
+	setTile(x, y, newTile, old = true) {
 		if (!this.valid(x, y)) {
 			return false;
 		};
 
 		newTile.x = x;
 		newTile.y = y;
-		newTile.above = this.map[y][x];
+		if (old) {
+			newTile.above = this.map[y][x];
+		}
 
 		this.map[y][x] = newTile;
 		update();
@@ -158,6 +196,8 @@ function update() {
 
 const io = require("socket.io")(server);
 io.on("connection", socket => {
+	socket.emit("placedata", placeData);
+
 	const pos = map.rand();
 	map.setTile(pos[0], pos[1], new PlayerBlock(socket));
 

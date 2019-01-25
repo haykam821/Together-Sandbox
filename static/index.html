@@ -49,6 +49,38 @@
 				top: 50%;
 				transform: translateY(-50%);
 			}
+			
+			#hud {
+				background-color: rgba(0, 0, 0, 0.5);
+				position: absolute;
+				bottom: 0px;
+				width: 50%;
+				height: 45px;
+				display: flex;
+				justify-content: center;
+			}
+
+			#hud > * {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				height: 40px;
+				width: 40px;
+				margin: 0 8px;
+				border: 1px solid white;
+				border-radius: 3px;
+				color: white;
+				-webkit-text-stroke: 0.5px black;
+				font-family: "Ubuntu", sans-serif;
+				font-weight: bold;
+				background: gray;
+				text-align: center;
+				font-size: 14px;
+				vertical-align: middle;
+				line-height: 40px;
+				white-space: nowrap;
+				overflow: hidden;
+			}
 		</style>
 	</head>
 
@@ -56,10 +88,9 @@
 		<span id="test"></span>
 
 		<div id="o">
-			<canvas id="e" style="opacity: 0;"></canvas>
+				<canvas id="e" style="opacity: 0;"></canvas>
+			<div id="hud"></div>
 		</div>
-
-
 	</body>
 
 </html>
