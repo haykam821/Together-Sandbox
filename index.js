@@ -125,6 +125,9 @@ function makeColorTile(color, name) {
 const placeables = {
 	Block,
 	WallBlock,
+	ColorBlock_light_gray: makeColorTile("#bdbdbd", "light gray"),
+	ColorBlock_gray: makeColorTile("#616161", "gray"),
+	ColorBlock_brown: makeColorTile("#795548", "brown"),
 	ColorBlock_pink: makeColorTile("#e91e63", "pink"),
 	ColorBlock_red: makeColorTile("#f44336", "red"),
 	ColorBlock_orange: makeColorTile("#ff9800", "orange"),
