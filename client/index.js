@@ -24,7 +24,7 @@ function setSelected(value) {
 		if (child.dataset.type === value) {
 			child.style.borderColor = "#18a9ff";
 		} else {
-			child.style.borderColor = "white";
+			child.style.borderColor = "";
 		}
 	})
 }
