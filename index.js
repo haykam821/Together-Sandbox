@@ -121,6 +121,37 @@ function makeColorTile(color, name) {
 
 	return colorTile;
 }
+class CooperativeSwitch extends Block {
+	constructor() {
+		super("#7777FF");
+	}
+}
+CooperativeSwitch.clientInfo = [
+	"Cooperative Switch",
+	`A switch that can be used to open up walls.`,
+	"#7777FF",
+];
+
+class CooperativeWall extends Block {
+	constructor(strengthNeeded = 1) {
+		super("#9999FF");
+		this.strengthNeeded = strengthNeeded;
+	}
+
+	collidable() {
+		const playersOnSwitches = map.findAll(block => {
+			return block.type === "PlayerBlock" && block.above && block.above.type === "CooperativeSwitch";
+		});
+		console.log(playersOnSwitches)
+		
+		return playersOnSwitches.length >= this.strengthNeeded;
+	}
+}
+CooperativeWall.clientInfo = [
+	"Cooperative Wall",
+	`A wall that can be opened by stepping on a Cooperative Switch.`,
+	"#9999FF",
+];
 
 const placeables = {
 	Block,
@@ -136,6 +167,8 @@ const placeables = {
 	ColorBlock_blue: makeColorTile("#2196f3", "blue"),
 	ColorBlock_indigo: makeColorTile("#3f51b5", "indigo"),
 	ColorBlock_purple: makeColorTile("#9c27b0", "purple"),
+	CooperativeSwitch,
+	CooperativeWall,
 };
 const placeData = Object.entries(placeables).map(entry => [
 	entry[0],
