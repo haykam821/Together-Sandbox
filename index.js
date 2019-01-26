@@ -190,6 +190,20 @@ class Map {
 		});
 	}
 
+	find(func) {
+		return this.tiles().find(func);
+	} 
+
+	findAllByProp(key, value) {
+		return this.tiles().filter(block => {
+			return block[key] === value;
+		});
+	}
+
+	findAll(func) {
+		return this.tiles().filter(func);
+	}
+
 	valid(x, y) {
 		return !(x < 0 || x >= this.size || y < 0 || y >= this.size);
 	}
