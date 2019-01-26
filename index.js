@@ -184,7 +184,7 @@ class Map {
 		}, []);
 	}
 
-	find(key, value) {
+	findByProp(key, value) {
 		return this.tiles().find(block => {
 			return block[key] === value;
 		});
@@ -235,7 +235,7 @@ io.on("connection", socket => {
 	map.setTile(pos[0], pos[1], new PlayerBlock(socket));
 
 	socket.on("disconnect", () => {
-		const playerTile = map.find("id", socket.id);
+		const playerTile = map.findByProp("id", socket.id);
 		if (playerTile) {
 			playerTile.revert();
 		}
